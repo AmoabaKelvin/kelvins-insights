@@ -6,7 +6,7 @@ from .base import *
 DEBUG = False
 
 # update allowed hosts
-ALLOWED_HOSTS = ["kelvinamoaba.me"]
+ALLOWED_HOSTS = ["kelvinamoaba.me", "kelvins-insights.herokuapp.com"]
 
 
 # email settings
