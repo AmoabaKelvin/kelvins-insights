@@ -3,7 +3,7 @@ import dj_database_url
 from .base import *
 
 # change DEBUG to False
-DEBUG = False
+DEBUG = os.environ["DEBUG"]
 
 # update allowed hosts
 ALLOWED_HOSTS = ["kelvinamoaba.me", "kelvins-insights.herokuapp.com"]
