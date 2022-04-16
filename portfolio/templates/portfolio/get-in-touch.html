@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+{% if form.errors %}
+    <div class="alert alert-danger">
+        {{ form.errors }}
+    </div>
+{% endif %}
+
+<div class="container mt-5 mb-5">
+    <h1 class="text-center">Contact Me</h1>
+    <div class="contact-me">
+        <form method="post">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="btn btn-success mx-auto">Send Message</button>
+        </form>
+    </div>
+</div><br>
+
+{% endblock content%}

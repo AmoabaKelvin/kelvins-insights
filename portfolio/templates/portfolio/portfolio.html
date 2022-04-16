@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>Kelvin Amoaba - Kelvin's Insights</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog Template">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- FontAwesome JS-->
+    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+    
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="{% static 'assets/css/theme-1.css' %}">
+    
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+	<!-- favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon/favicon-16x16.png' %}">
+	<link rel="manifest" href="{% static 'assets/favicon/site.webmanifest' %}">
+
+	<!-- Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+
+
+</head> 
+
+<body>
+    
+    <header class="header text-center">	    
+	    <h1 class="blog-name pt-lg-4 mb-0"><a href="{% url 'index' %}">Kelvin's Insights</a></h1>
+        
+	    <nav class="navbar navbar-expand-lg navbar-dark" >
+           
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navigation" class="collapse navbar-collapse flex-column" >
+				<div class="profile-section pt-3 pt-lg-0">
+				    <img class="profile-image mb-3 rounded-circle mx-auto" src="{{portfolio.profile_picture.url}}" alt="KELVIN AMOABA" style="object-fit: cover;width: 200px;height: 160px;">			
+					
+					<div class="bio mb-3">{{portfolio.short_description}}<br></div>
+					<ul class="social-list list-inline py-3 mx-auto">
+			            <li class="list-inline-item"><a href="{{portfolio.twitter}}"><i class="fab fa-twitter fa-fw myicons"></i></a></li>
+			            <li class="list-inline-item"><a href="{{portfolio.twitter}}"><i class="fab fa-linkedin-in fa-fw myicons"></i></a></li>
+			            <li class="list-inline-item"><a href="{{portfolio.github}}"><i class="fab fa-github-alt fa-fw myicons"></i></a></li>
+			            <li class="list-inline-item"><a href="{{portfolio.twitter}}"><i class="fab fa-telegram myicons"></i></a></li>
+			            <li class="list-inline-item"><a href="{{portfolio.twitter}}"><i class="fab fa-quora myicons"></i></a></li>
+			        </ul><!--//social-list-->
+			        <hr> 
+				</div><!--//profile-section-->
+				
+				<ul class="navbar-nav flex-column text-left">
+					<li class="nav-item">
+					    <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home fa-fw mr-2"></i>Blog Home <span class="sr-only">(current)</span></a>
+					</li>
+					<!-- <li class="nav-item">
+					    <a class="nav-link" href="blog-post.html"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog Post</a>
+					</li> -->
+					<!-- <li class="nav-item active">
+					    <a class="nav-link" href="{% url 'portfolio' %}"><i class="fas fa-user fa-fw mr-2"></i>About Me</a>
+					</li> -->
+					<li class="nav-item active">
+					    <a class="nav-link" href="{% url 'get_in_touch' %}"><i class="fas fa-envelope fa-fw mr-2"></i>Contact</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+    </header>
+    
+    <div class="main-wrapper">
+	    	    
+	    <article class="about-section py-5">
+		    <div class="container">
+			    <h2 class="title mb-3 text-center">About Me</h2>
+			    <figure><img class="img-fluid" src="{{portfolio.profile_picture.url}}" alt="image" height="200px"></figure>
+			    <p>{{portfolio.long_description|safe}}</p>
+			    
+				<!-- Experience -->
+			    <h5 class="mt-5">Experiences</h5>
+			    <p>{{portfolio.experience|safe}}</p>
+					
+				
+				<!-- Education -->
+			    <h5 class="mt-5">Education</h5>
+			    <p>{{portfolio.education|safe}}</p>
+
+
+				<!-- Skills -->
+				<h5 class="mt-5">Skills</h5>
+			    <p>{{portfolio.skills|safe}}</p>
+
+				<!-- projects -->
+				<h5 class="mt-5">Projects</h5>
+			    <p>{{portfolio.projects|safe}}</p>
+
+				<!-- Resume Download -->
+				<div class="center-btn" style="display: flex;flex-direction: row;justify-content: center;">
+					<a href="{{portfolio.resume.url}}" download="amoaba's_resume">
+						<button class="btn btn-success" style="background-color: #5FCB71;">
+							<i class="bi bi-download"></i>
+							Download Resume
+						</button>
+					</a>
+				</div>
+				
+				<div class="get-in-touch mt-5 mb-5" style="display: flex;justify-content: space-between;font-size: 40px;">
+					<a href="">
+						<i class="bi bi-linkedin myicons"></i>
+					</a>
+					<a href="">
+						<i class="bi bi-telegram myicons"></i>
+					</a>
+					<a href="">
+						<i class="bi bi-github myicons"></i>
+					</a>
+					<a href="">
+						<i class="bi bi-whatsapp myicons"></i>
+					</a>
+				</div>
+
+			    <!-- <h5 class="mt-5">Side Projects</h5>
+			    <p>Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.</p> -->
+		    </div>
+	    </article><!--//about-section-->
+	    
+	    <section class="cta-section theme-bg-light py-5">
+		    <div class="container text-center">
+			    <h2 class="heading">Kelvin's Insights</h2>
+			    <div class="intro">Welcome to my blog. Subscribe and get my latest blog post in your inbox.</div>
+			    <form class="signup-form form-inline justify-content-center pt-3" method="POST" action="{% url 'newsletter' %}">
+					{% csrf_token %}
+                    <div class="form-group">
+                        <label class="sr-only" for="semail">Your email</label>
+                        <input type="email" id="semail" name="semail" class="form-control mr-md-1 semail" placeholder="Enter email" minlength="3">
+                    </div>
+                    <button type="submit" class="btn btn-success myicons">Subscribe</button>
+                </form>
+		    </div><!--//container-->
+	    </section>
+	    
+	    <footer class="footer text-center py-2 theme-bg-dark">
+		   
+	        <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+		   
+	    </footer>
+    
+    </div><!--//main-wrapper-->
+    
+       
+    <!-- Javascript -->      
+    <script src="{% static 'assets/plugins/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/popper.min.js' %}"></script> 
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+
+</body>
+</html> 
+

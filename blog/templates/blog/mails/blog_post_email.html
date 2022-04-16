@@ -1,0 +1,8 @@
+HELLO, 
+<p>Thanks for signing up to keep in touch with my latest articles</p>
+<p>Here is the latest released article.</p>
+
+<p><b>{{post.title}}</b></p>
+<p>{{post.body|safe|striptags|truncatechars_html:300}}</p><br>
+<a href="{{post.get_full_absolute_url}}">Click here to read the full post</a>
+<p>Thank You</p>

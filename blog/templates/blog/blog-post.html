@@ -1,0 +1,111 @@
+{% extends 'blog/base.html' %}
+
+
+{% block newsletter %}
+	
+{% endblock newsletter %}
+	
+
+{% block content %}
+	<article class="blog-post px-1 py-1 p-md-5">
+		<div class="container">
+			<header class="blog-post-header">
+				<h2 class="title mb-2">{{blog.title}}</h2>
+				<div class="meta mb-3"><span class="date">{{blog.date_added|date:"Y-m-d"}}</span><span class="time">{{blog.time_to_read}} min read</span><span class="comment"><a href="#">{{blog.comments.count}} comments</a></span></div>
+			</header>
+			    
+			<div class="blog-post-body">
+				<p>{{blog.body|safe}}</p>
+			</div>
+
+			<div class="heart-icon">
+				{% if request.META.REMOTE_ADDR in address %}
+					<i class="bi bi-heart-fill" style="font-size: 40px;color: red;" onclick="likepost('{{blog.id}}')" id="heart">
+						<b class="likes-count" id="likes">{{blog.likes.count}}</b>
+					</i>
+				{% else %}
+					<i class="bi bi-heart-fill" style="font-size: 40px;color: grey;" onclick="likepost('{{blog.id}}')" id="heart">
+						<b class="likes-count" id="likes">{{blog.likes.count}}</b>
+					</i>
+				{% endif %}
+			</div>
+		</div>
+	</article>
+	    <!-- Comments section below -->
+		<!-- Blog comment form -->
+		<div class="container mb-5">
+			<form action="" method="POST">
+				<h6>Add Comment</h6>
+				{% csrf_token %}
+				{{form}}
+				<button type="submit" class="btn btn-success mt-2" onclick="add_comment_form_details_to_local_storage()">Comment</button>
+			</form>
+			{{form.errors}}
+
+			<!-- Displaying blog comments -->
+			<h1 class="mt-3">Comments - {{blog.comments.count}}</h1>
+			{% for comment in blog.comments.all %}
+				<div class="card mb-1">
+					<div class="card-body">
+						<h6 class="card-title">{{comment.name}}</h6>
+						<p class="card-text">{{comment.body}}</p>
+						<p class="card-text"><small class="text-muted">{{comment.date_added|date:"Y-m-d"}}</small></p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+		<!-- for now there is no promo section -->
+	    <!-- <section class="promo-section theme-bg-light py-5 text-center">
+		    <div class="container">
+			    <h2 class="title">Promo Section Heading</h2>
+			    <p>You can use this section to promote your side projects etc. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. </p>
+                <figure class="promo-figure">
+			        <a href="https://made4dev.com" target="_blank"><img class="img-fluid" src="assets/images/promo-banner.jpg" alt="image"></a>
+			    </figure>
+		    </div>
+	    </section> -->
+
+	<script>
+
+		// Once the webpage is loaded, get the stored comment name from the local storage and insert it into the comment form
+		window.onload = function () {
+			var name = localStorage.getItem('name');
+			document.getElementById('name').value = name;
+		}
+
+
+		// Add the name used in filling the comment form to the local storage
+		// This function is called when the submit button of the comment form is clicked
+		function add_comment_form_details_to_local_storage() {
+			var name = document.getElementById('name').value;
+			localStorage.setItem('name', name);
+			console.log(name)
+		}
+
+
+		function likepost(id) {
+			var request = new XMLHttpRequest();
+			request.responseType = "json";
+			request.open('POST', "{% url 'like_a_blog_post' 1 %}".replace(1, id), true);
+			request.send()
+			request.onreadystatechange = function() {
+				if (request.readyState == 4 && request.status == 200) {
+					console.log("Done")
+					if (request.response['added'] == true) {
+						const like_count = document.getElementById('likes')
+						const like_button = document.getElementById('heart');
+						like_button.style.color = "red";
+						like_count.innerHTML = request.response['likes']
+					}
+					else {
+						const like_count = document.getElementById('likes')
+						const like_button = document.getElementById('heart');
+						like_button.style.color = "grey";
+						like_count.innerHTML = request.response['likes']
+					}
+				}
+			}
+		}
+	</script>
+{% endblock content %}

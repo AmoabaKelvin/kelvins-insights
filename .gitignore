@@ -1,0 +1,19 @@
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+static/
+
+# virtual environment
+venv/
+
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
+*.profile
