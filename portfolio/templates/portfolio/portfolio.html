@@ -8,8 +8,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blog Template">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <meta name="description" content="Kelvin Amoaba's blog">
+    <meta name="author" content="Kelvin Amoaba, freelance software developer from Ghana">    
     <link rel="shortcut icon" href="favicon.ico"> 
     
     <!-- FontAwesome JS-->
@@ -105,14 +105,18 @@
 			    <p>{{portfolio.projects|safe}}</p>
 
 				<!-- Resume Download -->
-				<div class="center-btn" style="display: flex;flex-direction: row;justify-content: center;">
-					<a href="{{portfolio.resume.url}}" download="amoaba's_resume">
-						<button class="btn btn-success" style="background-color: #5FCB71;">
-							<i class="bi bi-download"></i>
-							Download Resume
-						</button>
-					</a>
-				</div>
+				<!-- Only show this button when a file is available for download -->
+				
+				{% if portfolio.resume %}
+					<div class="center-btn" style="display: flex;flex-direction: row;justify-content: center;">
+						<a href="{{portfolio.resume.url}}" download="amoaba's_resume">
+							<button class="btn btn-success" style="background-color: #5FCB71;">
+								<i class="bi bi-download"></i>
+								Download Resume
+							</button>
+						</a>
+					</div>
+				{% endif %}
 				
 				<div class="get-in-touch mt-5 mb-5" style="display: flex;justify-content: space-between;font-size: 40px;">
 					<a href="">
