@@ -13,16 +13,9 @@ DATABASES = {
     }
 }
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-#         "LOCATION": "",
-#     }
-# }
-
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = ("static",)
+STATICFILES_DIRS = ("staticfiles",)
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -33,7 +26,7 @@ EMAIL_HOST = "localhost"
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = "admin@localhost"
 EMAIL_HOST_USER = "admin@localhost"
-EMAIL_HOST_PASSWORD = "123Holyghost"
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASSWORD"]
 EMAIL_PORT = 25
 
 
