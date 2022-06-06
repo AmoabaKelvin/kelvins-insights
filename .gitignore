@@ -17,3 +17,7 @@ venv/
 !.vscode/extensions.json 
 .history
 *.profile
+
+
+# enviroment variables
+.env
