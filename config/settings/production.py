@@ -1,11 +1,9 @@
-import dj_database_url
-
 from .base import *
 
 DEBUG = False
 
 # update allowed hosts
-ALLOWED_HOSTS = ["kelvinamoaba.me", "kelvins-insights.herokuapp.com"]
+ALLOWED_HOSTS = ["kelvinamoaba.me", "www.kelvinamoaba.me"]
 
 
 # email settings
@@ -19,10 +17,15 @@ EMAIL_PORT = 587
 
 # configuring database for production environment
 DATABASES = {
-    "default": {},
+    "default": {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ["DB_NAME"],
+        'USER': os.environ["DB_USER"],
+        'PASSWORD': os.environ["DB_PASSWORD"],
+        'HOST': os.environ["DB_HOST"],
+        'PORT': os.environ["DB_PORT"],
+    },
 }
-prod_db = dj_database_url.config(conn_max_age=500)
-DATABASES["default"].update(prod_db)
 
 
 # configuring static files for production environment
