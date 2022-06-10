@@ -3,7 +3,7 @@ from .base import *
 DEBUG = False
 
 # update allowed hosts
-ALLOWED_HOSTS = ["kelvinamoaba.me", "www.kelvinamoaba.me"]
+ALLOWED_HOSTS = ["kelvinamoaba.me", "www.kelvinamoaba.me", "164.92.102.11"]
 
 
 # email settings
