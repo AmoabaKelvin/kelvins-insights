@@ -4,12 +4,9 @@ ALLOWED_HOSTS = ["*"]
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ["LOCAL_DBNAME"],
-        "USER": os.environ["LOCAL_DBUSER"],
-        "PASSWORD": os.environ["LOCAL_DBPASS"],
-        "HOST": os.environ["DB_HOST"],
-        "PORT": os.environ["DB_PORT"],
+        # for local development, use sqlite3
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
