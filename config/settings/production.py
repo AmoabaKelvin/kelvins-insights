@@ -17,16 +17,12 @@ EMAIL_PORT = 587
 
 # configuring database for production environment
 DATABASES = {
-    "default": {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["DB_NAME"],
-        'USER': os.environ["DB_USER"],
-        'PASSWORD': os.environ["DB_PASSWORD"],
-        'HOST': os.environ["DB_HOST"],
-        'PORT': os.environ["DB_PORT"],
-    },
+    "default": {}
 }
 
+import dj_database_url
+
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # configuring static files for production environment
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
