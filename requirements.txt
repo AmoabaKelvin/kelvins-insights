@@ -1,3 +1,4 @@
+python-dotenv==0.20.0
 amqp==5.1.0
 asgiref==3.5.0
 async-timeout==4.0.2
