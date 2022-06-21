@@ -87,21 +87,21 @@
 			    <p>{{portfolio.long_description|safe}}</p>
 			    
 				<!-- Experience -->
-			    <h5 class="mt-5">Experiences</h5>
+			    <h4 class="mt-5">Experiences</h4>
 			    <p>{{portfolio.experience|safe}}</p>
 					
 				
 				<!-- Education -->
-			    <h5 class="mt-5">Education</h5>
+			    <h4 class="mt-5">Education</h4>
 			    <p>{{portfolio.education|safe}}</p>
 
 
 				<!-- Skills -->
-				<h5 class="mt-5">Skills</h5>
+				<h4 class="mt-5">Skills</h4>
 			    <p>{{portfolio.skills|safe}}</p>
 
 				<!-- projects -->
-				<h5 class="mt-5">Projects</h5>
+				<h4 class="mt-5">Projects</h4>
 			    <p>{{portfolio.projects|safe}}</p>
 
 				<!-- Resume Download -->
@@ -119,17 +119,17 @@
 				{% endif %}
 				
 				<div class="get-in-touch mt-5 mb-5" style="display: flex;justify-content: space-between;font-size: 40px;">
-					<a href="">
+					<a href="{{portfolio.linkdin}}">
 						<i class="bi bi-linkedin myicons"></i>
 					</a>
-					<a href="">
+					<a href="{{porfolio.telegram}}">
 						<i class="bi bi-telegram myicons"></i>
 					</a>
-					<a href="">
+					<a href="{{portfolio.github}}">
 						<i class="bi bi-github myicons"></i>
 					</a>
-					<a href="">
-						<i class="bi bi-whatsapp myicons"></i>
+					<a href="{{portfolio.quora}}">
+						<i class="fab fa-quora fa-fw myicons"></i>
 					</a>
 				</div>
 
