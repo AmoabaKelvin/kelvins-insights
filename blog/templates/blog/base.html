@@ -129,7 +129,7 @@
 					    <!-- <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="assets/images/blog/blog-post-thumb-1.jpg" alt="image"> -->
 					    <div class="media-body">
 						    <h3 class="title mb-1"><a href="{% url 'detail' i.slug %}">{{i.title}}</a></h3>
-						    <div class="meta mb-1"><span class="date">Published {{i.date_added|date:"d M Y"}}</span><span class="time">{{i.time_to_read}} min read</span><span class="comment">{{i.comments.count}} comments</span><span class="likes"><i class="bi bi-heart-fill pr-1"></i>{{i.likes.count}}</span></div>
+						    <div class="meta mb-1"><span class="date">Published {{i.date_added|date:"d M Y"}}</span><span class="time">{{i.time_to_read}} min read</span><span class="comment"><a href="{% url 'detail' i.slug%}#disqus_thread"></a></span><span class="likes"><i class="bi bi-heart-fill pr-1"></i>{{i.likes.count}}</span></div>
 						    <div class="intro">{% autoescape on%} {{i.body|safe|striptags|truncatechars_html:200}} {% endautoescape %}</div>
 						    <a class="more-link" href="{% url 'detail' i.slug %}">Read more &rarr;</a>
 					    </div><!--//media-body-->
@@ -182,6 +182,7 @@
     
        
     <!-- Javascript -->          
+	<script id="dsq-count-scr" src="//kelvinamoaba-me.disqus.com/count.js" async></script>
     <script src="{% static 'assets/plugins/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'assets/plugins/popper.min.js' %}"></script> 
     <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script> 

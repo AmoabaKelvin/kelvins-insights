@@ -33,17 +33,17 @@
 	</article>
 	    <!-- Comments section below -->
 		<!-- Blog comment form -->
-		<div class="container mb-5">
+		<!-- <div class="container mb-5">
 			<form action="" method="POST">
 				<h6>Add Comment</h6>
 				{% csrf_token %}
 				{{form}}
 				<button type="submit" class="btn btn-success mt-2" onclick="add_comment_form_details_to_local_storage()">Comment</button>
 			</form>
-			{{form.errors}}
+			{{form.errors}} -->
 
 			<!-- Displaying blog comments -->
-			<h1 class="mt-3">Comments - {{blog.comments.count}}</h1>
+			<!-- <h1 class="mt-3">Comments - {{blog.comments.count}}</h1>
 			{% for comment in blog.comments.all %}
 				<div class="card mb-1">
 					<div class="card-body">
@@ -53,37 +53,30 @@
 					</div>
 				</div>
 			{% endfor %}
+		</div> -->
+
+		<div class="container">
+			<div id="disqus_thread"></div>
 		</div>
-
-		<!-- for now there is no promo section -->
-	    <!-- <section class="promo-section theme-bg-light py-5 text-center">
-		    <div class="container">
-			    <h2 class="title">Promo Section Heading</h2>
-			    <p>You can use this section to promote your side projects etc. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. </p>
-                <figure class="promo-figure">
-			        <a href="https://made4dev.com" target="_blank"><img class="img-fluid" src="assets/images/promo-banner.jpg" alt="image"></a>
-			    </figure>
-		    </div>
-	    </section> -->
-
+		<script>
+			/**
+			*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+			*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+			
+			var disqus_config = function () {
+			this.page.url = "https://kelvinamoaba.me/blog/{{blog.slug}}";  // Replace PAGE_URL with your page's canonical URL variable
+			this.page.identifier = "{{blog.slug}}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+			};
+			
+			(function() { // DON'T EDIT BELOW THIS LINE
+			var d = document, s = d.createElement('script');
+			s.src = 'https://kelvinamoaba-me.disqus.com/embed.js';
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 	<script>
-
-		// Once the webpage is loaded, get the stored comment name from the local storage and insert it into the comment form
-		window.onload = function () {
-			var name = localStorage.getItem('name');
-			document.getElementById('name').value = name;
-		}
-
-
-		// Add the name used in filling the comment form to the local storage
-		// This function is called when the submit button of the comment form is clicked
-		function add_comment_form_details_to_local_storage() {
-			var name = document.getElementById('name').value;
-			localStorage.setItem('name', name);
-			console.log(name)
-		}
-
-
 		function likepost(id) {
 			var request = new XMLHttpRequest();
 			request.responseType = "json";
