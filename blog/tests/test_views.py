@@ -28,10 +28,6 @@ class TestBlogViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "blog/blog-post.html")
 
-    # def test_blog_comment_view(self):
-    #     response = self.client.get(reverse("blog:comment", args=[self.blog.url]))
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, "blog/blog_comment.html")
 
     def test_blog_comment_post_view_with_invalid_data(self):
         response = self.client.post(

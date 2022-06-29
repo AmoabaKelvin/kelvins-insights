@@ -22,7 +22,6 @@ class Portfolio(models.Model):
     # Social Media Handles
     github = models.URLField(max_length=200)
     linkdin = models.URLField(max_length=200)
-    # reddit = models.URLField(max_length=200)
     telegram = models.URLField(max_length=200)
     quora = models.URLField(max_length=200)
     twitter = models.URLField(max_length=200)
