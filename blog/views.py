@@ -54,8 +54,7 @@ class BlogDetailView(View):
             form.instance.blog = blog
             form.save()
             return redirect(request.path)
-        else:
-            return HttpResponseBadRequest("Invalid form data")
+        return HttpResponseBadRequest("Invalid form data")
 
 
 def add_user_to_newsletter(request):
@@ -73,13 +72,12 @@ def add_user_to_newsletter(request):
                 messages.error(request, "Email already exists")
                 print(request.path)
                 return redirect(request.META.get("HTTP_REFERER", "/"))
-            else:
-                NewsletterSubscribers.objects.create(email=email)
-                messages.success(
-                    request,
-                    "Email added to newsletter. You will be notified when new posts are published.",
-                )
-                return redirect(request.META.get("HTTP_REFERER", "/"))
+            NewsletterSubscribers.objects.create(email=email)
+            messages.success(
+                request,
+                "Email added to newsletter. You will be notified when new posts are published.",
+            )
+            return redirect(request.META.get("HTTP_REFERER", "/"))
     return render(request, "blog/index.html")
 
 
@@ -94,14 +92,13 @@ def like_a_blog_post(request, post_id):
             # remove the like from the database.
             BlogLikes.objects.get(post=post, ip_address=ip_address).delete()
             return JsonResponse({"added": False, "likes": post.likes.count()})
-        else:
-            BlogLikes.objects.create(post=post, ip_address=ip_address)
-            return JsonResponse(
-                {
-                    "added": True,
-                    "likes": post.likes.count(),
-                }
-            )
+        BlogLikes.objects.create(post=post, ip_address=ip_address)
+        return JsonResponse(
+            {
+                "added": True,
+                "likes": post.likes.count(),
+            }
+        )
     return HttpResponseBadRequest("Invalid request")
 
 
@@ -122,6 +119,5 @@ def search_blog_posts(request):
             "blog/search-results.html",
             {"blogs": results, "search_term": search_term, "portfolio": portfolio},
         )
-    else:
-        messages.error(request, "Please enter a search term.")
-        return redirect("index")
+    messages.error(request, "Please enter a search term.")
+    return redirect("index")
