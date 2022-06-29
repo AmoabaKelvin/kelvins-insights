@@ -1,5 +1,3 @@
-from django.core.mail import EmailMessage
-from django.template.loader import render_to_string
 
 
 def calculate_time_to_read(content: str) -> int:
