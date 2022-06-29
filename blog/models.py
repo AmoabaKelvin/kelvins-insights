@@ -9,9 +9,7 @@ from .utils import calculate_time_to_read
 
 
 class BlogPost(models.Model):
-    """
-    Model for Blog Posts
-    """
+    """Model for Blog Posts"""
 
     # Choose the default first person in the database to use and assign it
     # to the author
@@ -41,9 +39,7 @@ class BlogPost(models.Model):
 
 
 class BlogComments(models.Model):
-    """
-    Model for Blog Comments
-    """
+    """Model for Blog Comments"""
 
     blog = models.ForeignKey(
         BlogPost, related_name="comments", on_delete=models.CASCADE
@@ -67,9 +63,7 @@ class BlogComments(models.Model):
 # that have subscribed to the newsletter.
 # The url for newsletter subscription is /newsletter/subscribe/
 class NewsletterSubscribers(models.Model):
-    """
-    Model for Newsletter Subscribers
-    """
+    """Model for Newsletter Subscribers"""
 
     email = models.EmailField(max_length=255)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -82,9 +76,7 @@ class NewsletterSubscribers(models.Model):
 
 
 class BlogLikes(models.Model):
-    """
-    Allow user to upvote a blog post
-    """
+    """Allow user to upvote a blog post"""
 
     post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name="likes")
     ip_address = models.GenericIPAddressField()

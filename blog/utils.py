@@ -15,9 +15,7 @@ def calculate_time_to_read(content: str) -> int:
 
 
 def get_client_ip(request):
-    """
-    Get the ip adddress of the client
-    """
+    """Get the ip adddress of the client"""
     x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
     if x_forwarded_for:
         ip = x_forwarded_for.split(",")[0]

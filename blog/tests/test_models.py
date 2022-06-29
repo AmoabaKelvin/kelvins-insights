@@ -23,15 +23,11 @@ class TestBlogModel(TestCase):
         self.like = BlogLikes.objects.create(post=self.blog, ip_address="127.0.0.1")
 
     def test_blog_was_created(self):
-        """
-        Test that the blog was created.
-        """
+        """Test that the blog was created."""
         self.assertIsInstance(self.blog, BlogPost)
 
     def test_blog_model_str(self):
-        """
-        Test that the blog model returns the correct string.
-        """
+        """Test that the blog model returns the correct string."""
         self.assertEqual(str(self.blog), "Test Blog")
 
     def test_blog_model(self):
@@ -43,9 +39,7 @@ class TestBlogModel(TestCase):
 
     # Tests for the Blog Comment model
     def test_blog_comment_model_str(self):
-        """
-        Test that the blog comment model returns the correct string.
-        """
+        """Test that the blog comment model returns the correct string."""
         self.assertEqual(str(self.comment), "This is a test comment.")
 
     def test_comment_belongs_to_blog(self):
@@ -57,9 +51,7 @@ class TestBlogModel(TestCase):
 
     # Tests for the Like model
     def test_like_model_str(self):
-        """
-        Test that the like model returns the correct string.
-        """
+        """Test that the like model returns the correct string."""
         self.assertEqual(str(self.like), f"{self.blog} - {self.like.ip_address}")
 
     def test_like_was_successfully_added_to_post(self):
