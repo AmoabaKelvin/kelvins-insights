@@ -28,9 +28,7 @@ class ListBlogPosts(ListView):
 
 
 class BlogDetailView(View):
-    """
-    Detail view for blog comment, the blog is obtained using the slug.
-    """
+    """Detail view for blog comment, the blog is obtained using the slug."""
 
     def get(self, request, *args, **kwargs):
         blog = get_object_or_404(BlogPost, slug=kwargs["slug"])
@@ -61,9 +59,7 @@ class BlogDetailView(View):
 
 
 def add_user_to_newsletter(request):
-    """
-    Add user to newsletter subscription
-    """
+    """Add user to newsletter subscription"""
     if request.method == "POST":
         email = request.POST.get("semail")
         if email:
@@ -89,9 +85,7 @@ def add_user_to_newsletter(request):
 
 @csrf_exempt
 def like_a_blog_post(request, post_id):
-    """
-    This view handles the upvote of a blog post.
-    """
+    """This view handles the upvote of a blog post."""
     if request.method == "POST":
         post = get_object_or_404(BlogPost, id=post_id)
         ip_address = get_client_ip(request)
@@ -113,9 +107,7 @@ def like_a_blog_post(request, post_id):
 
 @require_http_methods(["GET"])
 def search_blog_posts(request):
-    """
-    This view handles the search of blog posts.
-    """
+    """This view handles the search of blog posts."""
     # The name of the HTML input widget is called `search`
     # For now, the user's keyword is searched against the title of the blogs
     # present in the database.

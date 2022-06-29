@@ -9,9 +9,7 @@ from .tasks import send_new_post_alert_to_users_in_newsletter, send_welcome_emai
 
 @receiver(post_save, sender=BlogPost)
 def blog_post_created(sender, instance, created, **kwargs):
-    """
-    Sends a welcome email to a user who has just joined the newsletter
-    """
+    """Sends a welcome email to a user who has just joined the newsletter"""
     if created:
         email_subject = "NEW BLOG POST"
         email_body = render_to_string(
@@ -32,9 +30,7 @@ def blog_post_created(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=NewsletterSubscribers)
 def newsletter_subscribed(sender, instance, created, **kwargs):
-    """
-    Sends a welcome email to a user who has just joined the newsletter
-    """
+    """Sends a welcome email to a user who has just joined the newsletter"""
     if created:
         portfolio = Portfolio.objects.first()
         email_subject = "Welcome aboard"
