@@ -23,8 +23,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.sites",
-    "cloudinary_storage",
     "django.contrib.staticfiles",
+    "cloudinary_storage",
     # custom apps
     "blog",
     "portfolio",
