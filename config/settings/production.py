@@ -5,7 +5,11 @@ from .base import *
 DEBUG = os.environ["DEBUG"] == "True"
 
 # update allowed hosts
-ALLOWED_HOSTS = ["kelvinamoaba.me", "www.kelvinamoaba.me"]
+ALLOWED_HOSTS = [
+    "kelvinamoaba.me",
+    "www.kelvinamoaba.me",
+    "kelvinamoaba.herokuapp.com",
+]
 
 
 # email settings
@@ -23,20 +27,10 @@ DATABASES = {"default": {}}
 DATABASES["default"] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # configuring static files for production environment
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "staticfiles"),
-# ]
-STATICFILES_STORAGE = "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.RawMediaCloudinaryStorage"
-# cloudinary to host static files
-
 
 # cloudinary configuration
 CLOUDINARY_STORAGE = {
