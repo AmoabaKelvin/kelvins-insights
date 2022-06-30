@@ -31,30 +31,6 @@
 			</div>
 		</div>
 	</article>
-	    <!-- Comments section below -->
-		<!-- Blog comment form -->
-		<!-- <div class="container mb-5">
-			<form action="" method="POST">
-				<h6>Add Comment</h6>
-				{% csrf_token %}
-				{{form}}
-				<button type="submit" class="btn btn-success mt-2" onclick="add_comment_form_details_to_local_storage()">Comment</button>
-			</form>
-			{{form.errors}} -->
-
-			<!-- Displaying blog comments -->
-			<!-- <h1 class="mt-3">Comments - {{blog.comments.count}}</h1>
-			{% for comment in blog.comments.all %}
-				<div class="card mb-1">
-					<div class="card-body">
-						<h6 class="card-title">{{comment.name}}</h6>
-						<p class="card-text">{{comment.body}}</p>
-						<p class="card-text"><small class="text-muted">{{comment.date_added|date:"Y-m-d"}}</small></p>
-					</div>
-				</div>
-			{% endfor %}
-		</div> -->
-
 		<div class="container">
 			<div id="disqus_thread"></div>
 		</div>

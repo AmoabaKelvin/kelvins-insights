@@ -31,8 +31,7 @@ def get_in_touch_view(request):
                 "Thank you for reaching out to me. I will get back to you soon.",
             )
             return redirect(request.META.get("HTTP_REFERER"))
-    else:
-        form = GetInTouch()
+    form = GetInTouch()
     return render(
         request, "portfolio/get-in-touch.html", {"form": form, "portfolio": portfolio}
     )
