@@ -2,7 +2,7 @@ import dj_database_url
 
 from .base import *
 
-DEBUG = True
+DEBUG = False
 
 # update allowed hosts
 ALLOWED_HOSTS = ["kelvinamoaba.me", "www.kelvinamoaba.me"]
