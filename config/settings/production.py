@@ -8,7 +8,7 @@ DEBUG = os.environ["DEBUG"] == "True"
 ALLOWED_HOSTS = [
     "kelvinamoaba.me",
     "www.kelvinamoaba.me",
-    "kelvinamoaba.herokuapp.com",
+    "kelvins-insights.herokuapp.com",
 ]
 
 
