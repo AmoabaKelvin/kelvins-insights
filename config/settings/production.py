@@ -25,7 +25,7 @@ DATABASES["default"] = dj_database_url.config(conn_max_age=600, ssl_require=True
 # configuring static files for production environment
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "staticfiles"),
 ]
 STATICFILES_STORAGE = "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
 
