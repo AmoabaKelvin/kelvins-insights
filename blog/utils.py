@@ -1,3 +1,4 @@
+from django.http import HttpRequest
 
 
 def calculate_time_to_read(content: str) -> int:
@@ -12,11 +13,11 @@ def calculate_time_to_read(content: str) -> int:
     return time_to_read if time_to_read > 0 else 5
 
 
-def get_client_ip(request):
+def get_client_ip(request: HttpRequest) -> str:
     """Get the ip adddress of the client"""
     x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
     if x_forwarded_for:
-        ip = x_forwarded_for.split(",")[0]
-    else:
-        ip = request.META.get("REMOTE_ADDR")
-    return ip
+        # On heroku, the original client IP address is the last IP in the
+        # x-forwarded-for header.
+        return x_forwarded_for.split(",")[-1]
+    return request.META.get("REMOTE_ADDR")
