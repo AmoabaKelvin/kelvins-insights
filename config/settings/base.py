@@ -124,14 +124,14 @@ CKEDITOR_CONFIGS = {
             {
                 "name": "document",
                 "items": [
-                    "Source",
-                    "-",
-                    "Save",
+                    # "Source",
+                    # "-",
+                    # "Save",
                     "NewPage",
                     "Preview",
-                    "Print",
+                    # "Print",
                     "-",
-                    "Templates",
+                    # "Templates",
                 ],
             },
             {
@@ -141,7 +141,7 @@ CKEDITOR_CONFIGS = {
                     "Copy",
                     "Paste",
                     "PasteText",
-                    "PasteFromWord",
+                    # "PasteFromWord",
                     "-",
                     "Undo",
                     "Redo",
@@ -201,7 +201,7 @@ CKEDITOR_CONFIGS = {
             {"name": "styles", "items": ["Styles", "Format", "Font", "FontSize"]},
             {"name": "colors", "items": ["TextColor", "BGColor"]},
             {"name": "tools", "items": ["Maximize", "ShowBlocks"]},
-            {"name": "about", "items": ["About"]},
+            # {"name": "about", "items": ["About"]},
             "/",
             {
                 "name": "MyTools",
