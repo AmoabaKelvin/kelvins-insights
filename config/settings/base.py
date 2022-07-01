@@ -124,9 +124,6 @@ CKEDITOR_CONFIGS = {
             {
                 "name": "document",
                 "items": [
-                    # "Source",
-                    # "-",
-                    # "Save",
                     "NewPage",
                     "Preview",
                     # "Print",
@@ -201,7 +198,6 @@ CKEDITOR_CONFIGS = {
             {"name": "styles", "items": ["Styles", "Format", "Font", "FontSize"]},
             {"name": "colors", "items": ["TextColor", "BGColor"]},
             {"name": "tools", "items": ["Maximize", "ShowBlocks"]},
-            # {"name": "about", "items": ["About"]},
             "/",
             {
                 "name": "MyTools",
