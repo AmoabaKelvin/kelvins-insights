@@ -13,6 +13,8 @@ def send_message_to_myself(from_email: str, subject: str, message_content: str) 
         subject (str) : The subject of the message.
         message_content (str) : The content of the message.
     """
+    # format the subject of the message to include to sender's email address
+    subject = f"{subject} from {from_email}"
     send_mail(
         subject=subject,
         message=message_content,
