@@ -95,6 +95,9 @@ def like_a_blog_post(request, post_id):
         BlogLikes.objects.create(post=post, ip_address=ip_address)
         return JsonResponse(
             {
+                # The boolean value indicates whether the user has liked the
+                # post or not. It will be used by the frontend to change the
+                # like button color.
                 "added": True,
                 "likes": post.likes.count(),
             }
@@ -116,8 +119,8 @@ def search_blog_posts(request):
         portfolio = Portfolio.objects.first()
         return render(
             request,
-            "blog/search-results.html",
+            "blog/index.html",
             {"blogs": results, "search_term": search_term, "portfolio": portfolio},
         )
-    messages.error(request, "Please enter a search term.")
+    # if there is no search term, redirect user to the home page.
     return redirect("index")
