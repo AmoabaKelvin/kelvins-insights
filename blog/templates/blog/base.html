@@ -1,4 +1,5 @@
 {% load static %}
+{% load cache %}
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
@@ -23,6 +24,7 @@
 
     <!-- highlight.js-->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-dark.min.css" integrity="sha512-Jk4AqjWsdSzSWCSuQTfYRIF84Rq/eV0G2+tu07byYwHcbTGfdmLrHjUSwvzp5HvbiqK4ibmNwdcG49Y5RGYPTg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <!-- highlight.js -->
@@ -37,11 +39,10 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
 	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon/favicon-16x16.png' %}">
 	<link rel="manifest" href="{% static 'assets/favicon/site.webmanifest' %}">
-
 </head> 
 
 <body>
-    
+	{% cache 600 sidebar %}
     <header class="header text-center">	    
 	    <h1 class="blog-name pt-lg-4 mb-0"><a href="{% url 'index' %}">Kelvin's Insights</a></h1>
         
@@ -53,8 +54,7 @@
 
 			<div id="navigation" class="collapse navbar-collapse flex-column" >
 				<div class="profile-section pt-3 pt-lg-0">
-				    <img class="profile-image mb-3 rounded-circle mx-auto" src="{{portfolio.profile_picture.url}}" alt="image" style="object-fit: cover;height: 160px;width: 200px;">			
-					
+				    <img class="profile-image mb-3 rounded-circle mx-auto" src="{{portfolio.profile_picture.url}}" alt="image" style="object-fit: cover;height: 160px;width: 200px;">					
 					<div class="bio mb-3">{{portfolio.short_description}}<br><a href="{% url 'portfolio' %}">Find out more about me</a></div><!--//bio-->
 					<ul class="social-list list-inline py-3 mx-auto">
 			            <li class="list-inline-item"><a href="{{portfolio.twitter}}"><i class="fab fa-twitter fa-fw myicons"></i></a></li>
@@ -70,9 +70,6 @@
 					<li class="nav-item active">
 					    <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home fa-fw mr-2"></i>Blog Home <span class="sr-only">(current)</span></a>
 					</li>
-					<!-- <li class="nav-item">
-					    <a class="nav-link" href="blog-post.html"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog Post</a>
-					</li> -->
 					<li class="nav-item">
 					    <a class="nav-link" href="{% url 'portfolio' %}"><i class="fas fa-user fa-fw mr-2"></i>Portfolio</a>
 					</li>
@@ -83,62 +80,61 @@
 			</div>
 		</nav>
     </header>
-    
-    <!-- Newsletter alert section -->
-	
+
+	{% endcache %}
+    <!-- Django messages alert section -->
 	{% if messages %}
-		
 		{% for message in messages %}
 		<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
 			<strong>{{message}}</strong>
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
 		{% endfor %}
-			
 	{% endif %}
 		
 
     <div class="main-wrapper">
-        
         {% block content %}
         <section class="cta-section py-1">
 		    <div class="container text-center mt-1">
-			    <!-- <h3 class="">Search Blogs</h3> -->
-			    <!-- <div class="intro">Welcome to my blog. Subscribe and get my latest blog post in your inbox.</div> -->
 			    <form class="signup-form form-inline justify-content-center" method="GET" action="{% url 'search' %}">
                     <div class="form-group">
                         <label class="sr-only" for="semail">Enter Search Query Here</label>
-                        <input type="text" id="semail" name="search" class="form-control mr-md-1 semail" placeholder="Search post" minlength="3">
+                        <input type="text" id="semail" name="search" class="form-control mr-md-1 semail" placeholder="Search for a post..." minlength="3">
                     </div>
                     <button type="submit" class="btn btn-success" style="background-color: #5FCB71;">Search</button>
                 </form>
-				
 				{% if search_term %}
 					<b class="mt-3 mb-2 heading-1">Results for <i>{{search_term}}</i></b>
 				{% endif %}
-					
-		    </div><!--//container-->
+		    </div>
 	    </section>
-
-
 	    <section class="blog-list px-1 py-5 p-md-5">
 		    <div class="container">
-			    {% for i  in blogs %}
-			    <div class="item mb-5 mr-3">
-				    <div class="media">
-					    <!-- <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="assets/images/blog/blog-post-thumb-1.jpg" alt="image"> -->
-					    <div class="media-body">
-						    <h3 class="title mb-1"><a href="{% url 'detail' i.slug %}">{{i.title}}</a></h3>
-						    <div class="meta mb-1"><span class="date">Published {{i.date_added|date:"d M Y"}}</span><span class="time">{{i.time_to_read}} min read</span><span class="comment"><a href="{% url 'detail' i.slug%}#disqus_thread"></a></span><span class="likes"><i class="bi bi-heart-fill pr-1"></i>{{i.likes.count}}</span></div>
-						    <div class="intro">{% autoescape on%} {{i.body|safe|striptags|truncatechars_html:200}} {% endautoescape %}</div>
-						    <a class="more-link" href="{% url 'detail' i.slug %}">Read more &rarr;</a>
-					    </div><!--//media-body-->
-				    </div><!--//media-->
-			    </div><!--//item-->
-				{% endfor %}
+				<!-- 
+					Check if the incoming template variable blog has legnth not zero.
+					When the length is zero, it means that the user's search did not 
+					return any results.
+				-->
+				{% if blogs.count == 0 %}
+					<h4 class="text-center">Sorry, your search did not yield any results.</h4>
+				{% else %}
+					{% for i  in blogs %}
+					<div class="item mb-5 mr-3">
+						<div class="media">
+							<div class="media-body">
+								<h3 class="title mb-1"><a href="{% url 'detail' i.slug %}">{{i.title}}</a></h3>
+								<div class="meta mb-1"><span class="date">Published {{i.date_added|date:"d M Y"}}</span><span class="time">{{i.time_to_read}} min read</span><span class="comment"><a href="{% url 'detail' i.slug%}#disqus_thread"></a></span><span class="likes"><i class="bi bi-heart-fill pr-1"></i>{{i.likes.count}}</span></div>
+								<div class="intro">{% autoescape on%} {{i.body|safe|striptags|truncatechars_html:200}} {% endautoescape %}</div>
+								<a class="more-link" href="{% url 'detail' i.slug %}">Read more &rarr;</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				{% endif %}
 			    
+				<!-- Navigation Links -->
 			    <nav class="blog-nav nav nav-justified my-5">
-					
 					{% if page_obj.has_previous %}
 					<a class="nav-link-prev nav-item nav-link  rounded-left" href="?page={{page_obj.previous_page_number}}">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>		
 					{% endif %}
@@ -146,16 +142,13 @@
 					{% if page_obj.has_next %}
 					<a class="nav-link-next nav-item nav-link rounded" href="?page={{page_obj.next_page_number}}">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>		
 					{% endif %}
-						
-				  <!-- <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-				  <a class="nav-link-next nav-item nav-link rounded" href="blog-list.html">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a> -->
 				</nav>
-				
+			
 		    </div>
 	    </section>
         {% endblock content %}
-		
 		{% block newsletter %}
+		{% cache 600 newsletter %}
 	    <section class="cta-section theme-bg-light py-5">
 		    <div class="container text-center">
 			    <h2 class="heading">Kelvin's Insights</h2>
@@ -170,12 +163,12 @@
                 </form>
 		    </div><!--//container-->
 	    </section>
+		{% endcache %}
         {% endblock newsletter %}
 	    <footer class="footer text-center py-2 theme-bg-dark">
 		   
 	        <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
                 <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
-		   
 	    </footer>
     
     </div><!--//main-wrapper-->
