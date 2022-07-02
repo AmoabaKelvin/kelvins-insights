@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.views.decorators.cache import cache_page
 
 from .forms import GetInTouch
 from .models import Portfolio
@@ -12,6 +13,7 @@ def portfolio(request):
     return render(request, "portfolio/portfolio.html", {"portfolio": portfolio})
 
 
+@cache_page(60 * 15)
 def get_in_touch_view(request):
     """
     This view handles the get in touch form.
