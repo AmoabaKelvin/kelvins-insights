@@ -37,11 +37,11 @@ CLOUDINARY_STORAGE = {
     "CLOUDINARY_URL": os.environ["CLOUDINARY_URL"],
 }
 
-# Django security settings
-# SECURE_SSL_REDIRECT = True
-# SECURE_HSTS_SECONDS = 2592000
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
-# SECURE_BROWSER_XSS_FILTER = True
+# Django caching framework for production environment
+# The cache framework to use will be redis.
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.environ["REDIS_URL"],
+    }
+}

@@ -28,3 +28,12 @@ EMAIL_PORT = 25
 
 
 CELERY_BROKER_URL = "redis://localhost:6379"
+
+# Django caching framework in the local environment
+# The cache framework to use will be redis.
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://localhost:6379",
+    }
+}
