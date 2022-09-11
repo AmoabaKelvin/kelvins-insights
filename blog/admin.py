@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BlogPost, BlogComments, BlogLikes, NewsletterSubscribers
+from .models import BlogLikes, BlogPost, NewsletterSubscribers
 
 
 @admin.register(BlogPost)
@@ -16,14 +16,14 @@ class BlogAdmin(admin.ModelAdmin):
     ordering = ("-date_added",)
 
 
-@admin.register(BlogComments)
-class BlogCommentAdmin(admin.ModelAdmin):
-    """Admin View for BlogComment"""
+# @admin.register(BlogComments)
+# class BlogCommentAdmin(admin.ModelAdmin):
+#     """Admin View for BlogComment"""
 
-    list_display = ("name", "blog", "date_added")
-    list_filter = ("blog", "date_added")
-    search_fields = ("blog", "date_added")
-    ordering = ("-date_added",)
+#     list_display = ("name", "blog", "date_added")
+#     list_filter = ("blog", "date_added")
+#     search_fields = ("blog", "date_added")
+#     ordering = ("-date_added",)
 
 
 @admin.register(NewsletterSubscribers)
