@@ -33,7 +33,7 @@ def newsletter_subscribed(sender, instance, created, **kwargs):
     """Sends a welcome email to a user who has just joined the newsletter"""
     if created:
         portfolio = Portfolio.objects.first()
-        email_subject = "Welcome aboard"
+        email_subject = "Welcome to my newsletter"
         email_body = render_to_string(
             "blog/mails/welcome_email.html", {"portfolio": portfolio}
         )
