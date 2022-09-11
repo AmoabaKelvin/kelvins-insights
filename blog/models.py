@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db import models
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 from .utils import calculate_time_to_read
 
@@ -17,6 +18,8 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=255, unique=True)
     body = RichTextField(config_name="default")
     slug = AutoSlugField(populate_from="title", unique=True)
+    tags = TaggableManager()
+    post_image = models.ImageField(upload_to="media/blog_images", blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     time_to_read = models.PositiveIntegerField(default=0, blank=True)
 
@@ -36,24 +39,6 @@ class BlogPost(models.Model):
 
     def get_full_absolute_url(self):
         return f"{Site.objects.get_current().domain}{self.get_absolute_url()}"
-
-
-class BlogComments(models.Model):
-    """Model for Blog Comments"""
-
-    blog = models.ForeignKey(
-        BlogPost, related_name="comments", on_delete=models.CASCADE
-    )
-    name = models.CharField(max_length=50)
-    body = models.TextField()
-    date_added = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name = "Blog Comments"
-        verbose_name_plural = "Blog Comments"
-
-    def __str__(self):
-        return self.body
 
 
 # This model handles everything related to the newsletter. It's from
