@@ -1,9 +1,17 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.views.generic import View
 
 from .forms import GetInTouch
 from .models import Portfolio
 from .tasks import send_message_to_myself
+
+
+class AboutView(View):
+    def get(self, request):
+        # form = GetInTouch()
+        portfolio = Portfolio.objects.first()
+        return render(request, "portfolio/about.html", {"portfolio": portfolio})
 
 
 def portfolio(request):
@@ -28,7 +36,7 @@ def get_in_touch_view(request):
             send_message_to_myself.delay(from_email, subject, message)
             messages.success(
                 request,
-                "Thank you for reaching out to me. I will get back to you soon.",
+                "I will get back to you soon.",
             )
             return redirect(request.META.get("HTTP_REFERER"))
     form = GetInTouch()
