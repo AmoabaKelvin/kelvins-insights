@@ -1,12 +1,52 @@
 
-<!-- write a welcome to the newsletter -->
-<p>Hi there,</p>
-<p>Thanks for signing up to keep in touch with Kelvin's Insights, from now on you will receive my latest articles in your inbox.
-Please feel free to contact me if you have any questions or comments. You can reach me here on twitter, linkedin, github or telegram.
-<br>
-<a href="{{portfolio.linkdin}}">Linkedin</a>
-<a href="{{portfolio.github}}">Github</a>
-<a href="{{portfolio.telegram}}h">Instagram</a>
-<a href="{{portfolio.twitter}}">Twitter</a>
+{% load static %}
+<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 
-<p>Goodluck.</p>
+<p>Hi.</p>
+
+<p>
+    Welcome to Kelvin's Insights newsletter. I'm thrilled to see you here!
+    
+    I'm confident that this blog will help you become a better developer not only in the technical aspect
+    but also in all other aspects in general.
+    
+    I'll be sending you my latest blog posts directly in your inbox. I'll also be sending you some
+    other cool stuff that I think you'll find interesting.
+
+    I hope you enjoy your stay here and I hope you find this blog helpful.
+
+    If you have any questions you'd like to ask me, feel free to contact me using the contact form
+    <a href="http://kelvinamoaba.me/contact">here</a> or through my social media handles listed below.
+
+    <p class="social_media_header">
+        <span>Follow me on social media</span>
+    </p>
+    <div class="social_icons">
+        <a href="{{portfolio.linkedin}}" target="_blank" class="social_icon">
+            <i class="bi bi-linkedin"></i>
+            linkedin
+        </a>
+        <a href="{{portfolio.twitter}}" target="_blank" class="social_icon">
+            <i class="bi bi-twitter"></i>
+            Twitter
+        </a>
+        <a href="{{portfolio.quora}}" target="_blank" class="social_icon">
+            <i class="bi bi-quora"></i>
+            Quora
+        </a>
+        <a href="{{portfolio.github}}" target="_blank" class="social_icon">
+            <i class="bi bi-github"></i>
+            Github
+        </a>
+        <a href="{{portfolio.telegram}}" target="_blank" class="social_icon">
+            <i class="bi bi-telegram"></i>
+            Telegram
+        </a>
+    </div>
+
+</p>
+
+<p>
+    Take care!
+    Kelvin Amoaba.
+</p>
