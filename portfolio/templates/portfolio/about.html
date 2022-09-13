@@ -1,0 +1,76 @@
+{% extends 'blog/index-new.html' %}
+{% load static %}
+
+{% block extra_meta %}
+<meta name="description" content="I am Kelvin Amoaba, a software developer with love for technology. I spend my time building awesome applications that the world adores.">
+{% endblock %}
+
+
+{% block hero %}
+{% endblock hero %}
+
+
+
+{% block content %}
+    <div class="about_container">
+        <img src="{{portfolio.profile_picture.url}}" alt="Kelvin" class="about__img">
+        <div class="about__header">
+            <h1>Kelvin Amoaba</h1>
+            <p>{{portfolio.intro}}</p>
+        </div>
+        <div class="about__content">
+            <div class="about__text__container">
+                <p class="about__text">
+                    {{portfolio.description|safe}}
+                </p>
+                <p class="social_media_header">
+                    <span>Follow me on social media</span>
+                </p>
+                <div class="social_icons">
+                    <a href="{{portfolio.linkedin}}" target="_blank" class="social_icon">
+                        <i class="bi bi-linkedin"></i>
+                        linkedin
+                    </a>
+                    <a href="{{portfolio.twitter}}" target="_blank" class="social_icon">
+                        <i class="bi bi-twitter"></i>
+                        Twitter
+                    </a>
+                    <a href="{{portfolio.quora}}" target="_blank" class="social_icon">
+                        <i class="bi bi-quora"></i>
+                        Quora
+                    </a>
+                    <a href="{{portfolio.github}}" target="_blank" class="social_icon">
+                        <i class="bi bi-github"></i>
+                        Github
+                    </a>
+                    <a href="{{portfolio.telegram}}" target="_blank" class="social_icon">
+                        <i class="bi bi-telegram"></i>
+                        Telegram
+                    </a>
+                </div>
+                <div class="resume_section">
+                    
+                    {% if portfolio.resume %}
+
+                        <a href="{{portfolio.resume.url}}" class="social_icons" download>
+                            <i class="bi bi-cloud-arrow-down"></i>
+                            Download my resume
+                        </a>
+                    {% endif %}
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block navigation %}
+{% endblock navigation %}
+
+
+
+{% block alert %}
+    
+{% endblock alert %}
+    
