@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2f2fa2">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+    <!-- Meta tags for SEO -->
+    <meta name="title" content="Kelvin's Insights">
+    <meta name="description" content="A blog about software development engineering. Learn the latest trends in technology and take your development skill to the next level by learning, practicing and sharing ideas. ">
+    <meta name="keywords" content="tutorials, lessons, blog, django, html, css, javascript, learning, apply, share, python, web development, education">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="author" content="Kelvin Amoaba">
+    <meta name="contact" content="">
+
+    <!-- Extra meta tags block to be used on individual pages -->
+    {% block extra_meta %}
+    {% endblock %}
+
+    <!-- highlight.js-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'assets/favicon/site.webmanifest' %}">
+    <title>Kelvin's Insights - Learn, practice, share and perfect your skills</title>
+</head>
+<body>
+    <header>
+        <a href="{% url 'index' %}" class="nav__logo">Kelvin's Insights</a>
+        <nav class="nav__menu">
+            <i class="bi bi-list nav__toggle"></i>
+            <ul class="nav__toggle__icons">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'portfolio' %}">About</a></li>
+                <li><a href="{% url 'get_in_touch' %}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+    {% block hero %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero__container">
+            <h1 class="hero__title">Kelvin's Insights</h1>
+            <p class="hero__subtitle">A software development blog</p>
+        </div>
+        <!-- Search blogs Box and search button -->
+        
+            <div class="search__container">
+                <form method="GET" action="{% url 'search' %}" class="search-form">
+                <input type="text" class="search__box" placeholder="Search Blogs" name="search">
+                <button class="search__btn" type="submit">Search</button>
+                </form>
+            </div>
+        <!-- </form> -->
+    </section>
+    {% endblock hero %}
+    
+    {% block search_results_header %}
+        {% if search_term %}
+            <h2 class="search__results__header container">Search Results for: <span>{{ search_term }}</span></h2>
+        {% endif %}
+    {% endblock search_results_header %}
+        
+
+
+    <!-- Blog Section -->
+    {% block content %}
+    <section class="blog container">
+        <div class="blog__container">
+            {% for i  in blogs %}
+            <div class="blog__card">
+                <img src="{{i.post_image.url}}" alt="{{i.tile}}" class="blog__img">
+                <div class="blog__content">
+                    <h3 class="blog__title">{{i.title}}</h3>
+                    <div class="blog__flair__container">
+                        {% for tag in i.tags.all %}
+                        <span class="blog__flair">{{tag}}</span>
+                        {% endfor %}
+                    </div>
+                    <p class="blog__text">
+                        {{i.body|safe|striptags|truncatechars_html:250}}
+                    </p>
+                    <div class="blog__footer">
+                        <a href="{% url 'detail' i.slug %}" class="blog__btn">Read More</a>
+                        <span class="time__to__read">
+                            {{i.time_to_read}} min
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endblock %}
+
+
+    
+    {% block comments %}
+        
+    {% endblock comments %}
+
+
+    <!-- Navigation Section -->
+    {% block navigation %}
+    <div class="navigation__container container">
+        {% if page_obj.has_previous %}
+        <a href="#" class="navigation__btn--prev">PREV<i class="bi bi-arrow-left"></i></a>
+        {% else %}
+        <span href="#" class="navigation__btn--prev disabled"><i class="bi bi-arrow-left"></i>PREV</span>
+        {% endif %}
+        <span class="navigation__number">{{page_obj.number}}</span>
+        {% if page_obj.has_next %}
+        <a href="#" class="navigation__btn--next">NEXT<i class="bi bi-arrow-right"></i></a>
+        {% else %}
+        <span class="navigation__btn--next disabled">NEXT<i class="bi bi-arrow-right"></i></span>
+        {% endif %}
+    </div>
+    {% endblock navigation %}
+
+
+    <!-- Alert box section -->
+    {% block alert %}
+    {% if messages %} 
+    {% for message in messages %}
+    <div class="alert_container">
+        <p class="alert_message">
+            <i class="bi bi-check-circle"></i>
+            {{ message }}
+        </p>
+        <i class="bi bi-x-circle close__icon" id="close_alert"></i>
+    </div>
+    {% endfor %} 
+    {% endif %} 
+    {% endblock alert %}
+
+    <!-- Newsletter Section -->
+    <section class="newsletter container">
+        <div class="newsletter__container">
+            <h3 class="newsletter__title">Subscribe to my newsletter</h3>
+            <p class="newsletter__text">Receive my latest blog posts directly in your inbox</p>
+            <form action="{% url 'newsletter' %}" class="newsletter__form" method="POST">
+                {% csrf_token %}
+                <input type="email" class="newsletter__input" placeholder="Enter your email" name="user_email" required minlength="5">
+                <button class="newsletter__btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <h4>&copy; 2021 Kelvin's Insights</h4>
+        <h5>Made with <span style="color: red;">❤</span> in Ghana</h5>
+    </footer>
+</body>
+</html>
