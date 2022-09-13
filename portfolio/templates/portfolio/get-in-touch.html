@@ -1,23 +1,20 @@
-{% extends 'blog/base.html' %}
-{% load crispy_forms_tags %}
-
-
+{% extends 'blog/index-new.html' %}
+{% block hero %} 
+{% endblock hero%} 
 {% block content %}
-{% if form.errors %}
-    <div class="alert alert-danger">
-        {{ form.errors }}
+<div class="contact__header" style="text-align: center; margin: 20px 0px 20px 0px">
+    <h1>Contact Me</h1>
+    <p>I'll get back to you as soon as possible.</p>
+</div>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="contact-form">
+        <div class="form-container">{% for field in form %} {{ field }} {% endfor %}</div>
     </div>
-{% endif %}
-
-<div class="container mt-5 mb-5">
-    <h1 class="text-center">Contact Me</h1>
-    <div class="contact-me">
-        <form method="post">
-            {% csrf_token %}
-            {{form|crispy}}
-            <button type="submit" class="btn btn-success mx-auto">Send Message</button>
-        </form>
+    <div class="submit">
+        <button type="submit" class="search__btn" id="form__submit">Submit</button>
     </div>
-</div><br>
-
-{% endblock content%}
+</form>
+{% endblock content %} 
+{% block navigation %} 
+{% endblock navigation %} 
