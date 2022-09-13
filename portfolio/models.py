@@ -6,22 +6,16 @@ class Portfolio(models.Model):
     """Model definition for Portfolio."""
 
     # PERSONAL
-    short_description = models.CharField(max_length=500)
-    long_description = models.TextField()
+    intro = models.TextField()  # This is the intro paragraph on the about page
+    description = RichTextField()
     profile_picture = models.ImageField(upload_to="media/myimages/", blank=True)
-
-    # PORTFOLIO
-    experience = RichTextField()
-    projects = RichTextField()
-    skills = RichTextField()
-    education = RichTextField()
 
     # RESUME
     resume = models.FileField(upload_to="media/files/resume/", blank=True)
 
     # Social Media Handles
     github = models.URLField(max_length=200)
-    linkdin = models.URLField(max_length=200)
+    linkedin = models.URLField(max_length=200)
     telegram = models.URLField(max_length=200)
     quora = models.URLField(max_length=200)
     twitter = models.URLField(max_length=200)
